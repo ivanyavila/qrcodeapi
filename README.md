@@ -34,7 +34,7 @@ This repository offers a RESTful API designed for the generation and validation 
 ## RUN REST API:
 
 1. Navigate to `your_folder\qrcodeapi\src\main\resources`
-2. Create a local.yml file with the following format:
+2. **Create a local.yml** file with the following format:
 
       ```
       database:
