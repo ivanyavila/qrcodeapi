@@ -36,19 +36,19 @@ Users can utilize this API to create and verify unique QR codes, enabling seamle
 1. Navigate to `your_folder\qrcodeapi\src\main\resources`
 2. Create a local.yml file with the next format:
 
-        ```
-        database:
-          type: postgresql
-          hostname: localhost
-          port: 5432
-          name: qrcodeapi
-          username: <usr>
-          password: <pass>
-        ```
+      ```
+      database:
+        type: postgresql
+        hostname: localhost
+        port: 5432
+        name: qrcodeapi
+        username: <user>
+        password: <pass>
+      ```
 
-3. Execute: `docker compose up -d`
-4. Navigate back to `your_folder\qrcodeapi\`
-5. Execute: `./gradlew bootRun`
+4. Execute: `docker compose up -d`
+5. Navigate back to `your_folder\qrcodeapi\`
+6. Execute: `./gradlew bootRun`
 
 ## STOP REST API:
 
