@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: qrcodeapi
+  config:
+    import: local.yml
+  web:
+    resources:
+      add-mappings: false
+  datasource:
+    url: jdbc:${database.type}://${database.hostname}:${database.port}/${database.name}
+    username: ${database.username}
+    password: ${database.password}
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 5
+      auto-commit: false
+logging:
+  level:
+    org:
+      hibernate:
+        sql: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-exception: true
+    include-stacktrace: never
+  servlet:
+    context-path: /qrcode
+  port: 8080
