@@ -6,7 +6,8 @@ build/
 !**/src/test/**/build/
 
 ### ENV FILES ###
-src/main/resources/local.yml
+src/main/resources/*.yml
+src/main/resources/*.env
 
 ### STS ###
 .apt_generated
