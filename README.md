@@ -41,21 +41,30 @@ This repository offers a RESTful API designed for the generation and validation 
         type: postgresql
         hostname: localhost
         port: 5432
-        name: qrcodeapi
+        name: <db name>
         username: <user>
         password: <pass>
       ```
 
-4. Execute: `docker compose up -d`
-5. Navigate back to `your_folder\qrcodeapi\`
-6. Execute: `./gradlew bootRun`
+4. **Create a local.env** file with the following format:
+
+      ```
+        POSTGRESDB_DATABASE=<db name>
+        POSTGRESDB_USER=<user>
+        POSTGRESDB_PASSWORD=<pass>
+        POSTGRESDB_PORT=5432
+      ```
+
+5. Execute: `docker compose --env-file .\local.env up`
+6. Navigate back to `your_folder\qrcodeapi\`
+7. Execute: `./gradlew bootRun`
 
 ## STOP REST API:
 
 1. Go to the same command prompt where the REST API is running
 2. Press "Ctrl + c" to stop the REST API, and press "Y" and "enter" (or "S" according to your OS language)
 3. Navigate to `your_folder\qrcodeapi\src\main\resources`
-4. Execute: `docker compose down`
+4. Execute: `docker compose --env-file .\local.env down`
 
 ## SWAGGER LOCATION:
 Once the REST API is running, access Swagger at:
