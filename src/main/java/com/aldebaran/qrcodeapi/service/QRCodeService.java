@@ -27,14 +27,14 @@ public class QRCodeService {
     private final QRCodeGenerator qrCodeGenerator;
     private final QRCodeRepository repository;
 
-    public QRCode create(long validUntilInHours) throws IOException, WriterException {
+    public QRCode create(int validUntilInHours) throws IOException, WriterException {
         QRCode qrCode = new QRCode();
         long createAt = localDateTimeLoMilliseconds(qrCode.getCreatedAt());
         String ulidId = ulid.nextULID(createAt);
         String code = Base64.getEncoder().encodeToString(qrCodeGenerator.getQRCodeBytes(ulidId));
         qrCode.setUlid(ulidId);
         qrCode.setCode(code);
-        qrCode.setValidUntil(createAt + (3600000 * validUntilInHours));
+        qrCode.setValidUntil(createAt + (3600000L * validUntilInHours));
         return this.repository.save(qrCode);
     }
 

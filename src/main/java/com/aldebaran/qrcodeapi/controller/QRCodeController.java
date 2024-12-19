@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,10 +26,11 @@ public class QRCodeController {
     private final QRCodeService qrCodeService;
 
     @Operation(summary = "Generates a QRCode given an expiration time in hours")
-    @GetMapping(path = "/generate/{validUntilInHours}")
+    @PostMapping(path = "/generate/{validUntilInHours}")
     public ResponseEntity<QRCode> generate(@PathVariable @Pattern(regexp = "^(3|6|12|24)$") String validUntilInHours) throws IOException, WriterException {
-        QRCode qrcode = qrCodeService.create(Long.parseLong(validUntilInHours));
-        log.info("GET: QRCode Generated with ULID: {}, expiration time in hours: {}, created at: {}, valid until: {}",qrcode.getUlid(), validUntilInHours, qrcode.getCreatedAt(), qrcode.getValidUntil());
+        // https://stackoverflow.com/questions/66558209/bean-validation-to-check-for-one-of-a-few-integer-values
+        QRCode qrcode = qrCodeService.create(Integer.parseInt(validUntilInHours));
+        log.info("POST: QRCode Generated with ULID: {}, expiration time in hours: {}, created at: {}, valid until: {}",qrcode.getUlid(), validUntilInHours, qrcode.getCreatedAt(), qrcode.getValidUntil());
         return ResponseEntity.status(HttpStatus.CREATED).body(qrcode);
     }
 
